@@ -9,6 +9,7 @@
 #define	FNT_FACE_HPP
 
 #include <map>
+#include "GLT/Texture.hpp"
 #include "ft2build.h"
 #include FT_FREETYPE_H
 #include "Glyph.hpp"
@@ -21,11 +22,15 @@ namespace fnt
         FT_Library m_freetype;
         FT_Face m_face;
         unsigned int m_size;
+        GLuint m_vertexArray;
+        glt::Texture m_texture;
 
         public:
             Face( std::string const& i_filename, unsigned int const& i_size );
             void LoadGlyphs( std::u32string const& i_glyphs );
             Glyph const& GlyphData( uint32_t const& i_glyph ) const;
+            glt::Texture const& Texture() const { return m_texture; }
+            GLuint const& VertexArray() const { return m_vertexArray; }
     };
 }
 

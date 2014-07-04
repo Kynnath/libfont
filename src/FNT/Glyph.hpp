@@ -8,12 +8,17 @@
 #ifndef GLYPH_HPP
 #define	GLYPH_HPP
 
+#include "GL/glew.h"
+
 namespace fnt
 {
-    class Glyph
+    struct Glyph
     {
+        GLvoid const* m_indicesOffset;
+        GLfloat m_advance;
+        
         public:
-            Glyph();
+            //Glyph();
 
     };
 }
