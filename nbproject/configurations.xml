@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="94">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -41,11 +41,14 @@
         <ccTool>
           <standard>8</standard>
           <incDir>
-            <pElem>../../../../../lib/glew-1.10.0/include</pElem>
             <pElem>../../../../../lib/freetype-2.5.3/include</pElem>
+            <pElem>../../../../../lib/glew-1.11.0/include</pElem>
             <pElem>../libgltools/src</pElem>
           </incDir>
           <commandLine>-Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winline -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector</commandLine>
+          <preprocessorList>
+            <Elem>GLEW_STATIC</Elem>
+          </preprocessorList>
           <warningLevel>2</warningLevel>
         </ccTool>
         <archiverTool>
@@ -75,11 +78,14 @@
           <stripSymbols>true</stripSymbols>
           <standard>8</standard>
           <incDir>
-            <pElem>../../../../../lib/glew-1.10.0/include</pElem>
             <pElem>../../../../../lib/freetype-2.5.3/include</pElem>
+            <pElem>../../../../../lib/glew-1.11.0/include</pElem>
             <pElem>../libgltools/src</pElem>
           </incDir>
           <commandLine>-Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winline -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector</commandLine>
+          <preprocessorList>
+            <Elem>GLEW_STATIC</Elem>
+          </preprocessorList>
           <warningLevel>2</warningLevel>
         </ccTool>
         <fortranCompilerTool>
@@ -89,6 +95,7 @@
           <developmentMode>5</developmentMode>
         </asmTool>
         <archiverTool>
+          <commandLine>-DGLEW_STATIC</commandLine>
         </archiverTool>
       </compileType>
       <item path="src/FNT/Face.cpp" ex="false" tool="1" flavor2="0">

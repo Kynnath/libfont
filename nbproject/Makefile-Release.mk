@@ -62,18 +62,18 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a
-	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a ${OBJECTFILES} 
+	${AR} -rv -DGLEW_STATIC ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a
 
 ${OBJECTDIR}/src/FNT/Face.o: src/FNT/Face.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/FNT
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -Wall -s -I../../../../../lib/glew-1.10.0/include -I../../../../../lib/freetype-2.5.3/include -I../libgltools/src -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Face.o src/FNT/Face.cpp
+	$(COMPILE.cc) -O2 -Wall -s -DGLEW_STATIC -I../../../../../lib/freetype-2.5.3/include -I../../../../../lib/glew-1.11.0/include -I../libgltools/src -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Face.o src/FNT/Face.cpp
 
 ${OBJECTDIR}/src/FNT/Glyph.o: src/FNT/Glyph.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/FNT
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -Wall -s -I../../../../../lib/glew-1.10.0/include -I../../../../../lib/freetype-2.5.3/include -I../libgltools/src -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Glyph.o src/FNT/Glyph.cpp
+	$(COMPILE.cc) -O2 -Wall -s -DGLEW_STATIC -I../../../../../lib/freetype-2.5.3/include -I../../../../../lib/glew-1.11.0/include -I../libgltools/src -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Glyph.o src/FNT/Glyph.cpp
 
 # Subprojects
 .build-subprojects:
