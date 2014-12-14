@@ -43,8 +43,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winline -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector
-CXXFLAGS=-Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winline -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector
+CCFLAGS=-m64 -Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector -std=c++1y
+CXXFLAGS=-m64 -Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector -std=c++1y
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -68,12 +68,12 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a: ${OBJECTFILES}
 ${OBJECTDIR}/src/FNT/Face.o: src/FNT/Face.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/FNT
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -DGLEW_STATIC -I../../../../../lib/freetype-2.5.3/include -I../../../../../lib/glew-1.11.0/include -I../libgltools/src -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Face.o src/FNT/Face.cpp
+	$(COMPILE.cc) -g -Wall -DGLEW_STATIC -I../../../../../lib/freetype-2.5.3/include -I../../../../../lib/glew-1.11.0/include -I../libgltools/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Face.o src/FNT/Face.cpp
 
 ${OBJECTDIR}/src/FNT/Glyph.o: src/FNT/Glyph.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/FNT
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -DGLEW_STATIC -I../../../../../lib/freetype-2.5.3/include -I../../../../../lib/glew-1.11.0/include -I../libgltools/src -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Glyph.o src/FNT/Glyph.cpp
+	$(COMPILE.cc) -g -Wall -DGLEW_STATIC -I../../../../../lib/freetype-2.5.3/include -I../../../../../lib/glew-1.11.0/include -I../libgltools/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Glyph.o src/FNT/Glyph.cpp
 
 # Subprojects
 .build-subprojects:
