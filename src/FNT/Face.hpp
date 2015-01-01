@@ -16,22 +16,28 @@
 
 namespace fnt
 {
-    class Face
-    {
-        std::map<uint32_t, Glyph> m_characterMap;
-        FT_Library m_freetype;
-        FT_Face m_face;
-        unsigned int m_size;
-        GLuint m_vertexArray;
-        glt::Texture m_texture;
+  class Face
+  {
+    std::map<uint32_t, Glyph> m_characterMap;
+    FT_Library m_freetype;
+    FT_Face m_face;
+    unsigned int m_size;
+    GLuint m_vertexArray;
+    glt::Texture m_texture;
 
-        public:
-            Face( std::string const& i_filename, unsigned int const& i_size );
-            void LoadGlyphs( std::u32string const& i_glyphs );
-            Glyph const& GlyphData( uint32_t const& i_glyph ) const;
-            glt::Texture const& Texture() const { return m_texture; }
-            GLuint const& VertexArray() const { return m_vertexArray; }
-    };
+    Face(Face const& f) = delete;
+    Face& operator=(Face const& f) = delete;
+    Face& operator=(Face && f) = delete;
+
+    public:
+      Face( std::string const& i_filename, unsigned int const& i_size );
+      Face(Face && f);
+      ~Face();
+      void LoadGlyphs( std::u32string const& i_glyphs );
+      Glyph const& GlyphData( uint32_t const& i_glyph ) const;
+      glt::Texture const& Texture() const { return m_texture; }
+      GLuint const& VertexArray() const { return m_vertexArray; }
+  };
 }
 
 #endif	/* FNT_FACE_HPP */
