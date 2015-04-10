@@ -12,15 +12,11 @@
 
 namespace fnt
 {
-    struct Glyph
-    {
-        GLvoid const* m_indicesOffset;
-        GLfloat m_advance;
-        
-        public:
-            //Glyph();
-
-    };
+  struct Glyph
+  {
+    GLvoid const* m_indicesOffset;
+    GLfloat m_advance;
+  };
 }
 
 #endif	/* GLYPH_HPP */

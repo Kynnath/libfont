@@ -26,7 +26,7 @@ namespace fnt
     FT_UInt const xSize = 0;
     FT_Set_Pixel_Sizes( m_face, xSize, i_size );
   }
-  
+
   Face::Face(Face && f)
     : m_characterMap {std::move(f.m_characterMap)}
     , m_freetype {std::move(f.m_freetype)}
@@ -35,10 +35,11 @@ namespace fnt
     , m_vertexArray {std::move(f.m_vertexArray)}
     , m_texture {std::move(f.m_texture)}
   {
-      f.m_freetype = 0;
-      f.m_face = 0;
+    f.m_freetype = 0;
+    f.m_face = 0;
+    f.m_vertexArray = 0;
   }
-  
+
   Face::~Face()
   {
     FT_Done_Face(m_face);
@@ -66,8 +67,8 @@ namespace fnt
 
   static void AddGlyphToBitmap( FT_GlyphSlotRec_ const& i_glyph, Bitmap & o_bitmap )
   {
-    auto const glyphWidth = i_glyph.bitmap.width;
-    auto const glyphHeight = i_glyph.bitmap.rows;
+    auto const glyphWidth = static_cast<int>(i_glyph.bitmap.width);
+    auto const glyphHeight = static_cast<int>(i_glyph.bitmap.rows);
     if ( glyphWidth > 256 || glyphHeight > 256 )
     {
       throw 0; // throw glyph too large error
@@ -203,16 +204,16 @@ namespace fnt
     m_vertexArray = CreateVertexArrayObject( faceModel );
   }
 
-  Glyph const& Face::GlyphData( uint32_t const& i_glyph ) const
+  Glyph const& Face::GlyphData(uint32_t glyph) const
   {
-    auto glyphIter = m_characterMap.find( i_glyph );
-    if ( glyphIter != m_characterMap.end() )
+    auto glyphIter = m_characterMap.find(glyph);
+    if (glyphIter != m_characterMap.end())
     {
       return glyphIter->second;
     }
     else
     {
-      return m_characterMap.find( 0 )->second;
+      return m_characterMap.find(0)->second;
     }
   }
 }

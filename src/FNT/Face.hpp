@@ -33,8 +33,8 @@ namespace fnt
       Face( std::string const& i_filename, unsigned int const& i_size );
       Face(Face && f);
       ~Face();
-      void LoadGlyphs( std::u32string const& i_glyphs );
-      Glyph const& GlyphData( uint32_t const& i_glyph ) const;
+      void LoadGlyphs(std::u32string const& i_glyphs);
+      Glyph const& GlyphData(uint32_t glyph) const;
       glt::Texture const& Texture() const { return m_texture; }
       GLuint const& VertexArray() const { return m_vertexArray; }
   };
