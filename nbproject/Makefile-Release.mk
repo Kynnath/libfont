@@ -68,12 +68,12 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibfont.a: ${OBJECTFILES}
 ${OBJECTDIR}/src/FNT/Face.o: src/FNT/Face.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/FNT
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -Wall -s -DGLEW_STATIC -I../../../lib/freetype-2.5.5/include -I../../../lib/glew-1.12.0/include -I../libgltools/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Face.o src/FNT/Face.cpp
+	$(COMPILE.cc) -O2 -Wall -s -DGLEW_STATIC -I../../../lib/freetype-2.5.5/include -I../../../lib/glew-1.12.0/include -I../libgltools/src -I../libtools/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Face.o src/FNT/Face.cpp
 
 ${OBJECTDIR}/src/FNT/Glyph.o: src/FNT/Glyph.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/FNT
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -Wall -s -DGLEW_STATIC -I../../../lib/freetype-2.5.5/include -I../../../lib/glew-1.12.0/include -I../libgltools/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Glyph.o src/FNT/Glyph.cpp
+	$(COMPILE.cc) -O2 -Wall -s -DGLEW_STATIC -I../../../lib/freetype-2.5.5/include -I../../../lib/glew-1.12.0/include -I../libgltools/src -I../libtools/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/FNT/Glyph.o src/FNT/Glyph.cpp
 
 # Subprojects
 .build-subprojects:

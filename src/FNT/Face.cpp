@@ -10,7 +10,7 @@
 #include <cstring>
 #include <memory>
 #include <utility>
-#include "GLT/Image.cpp"
+#include "GLT/Image.hpp"
 #include "GLT/Model.hpp"
 
 namespace fnt
@@ -37,7 +37,6 @@ namespace fnt
   {
     f.m_freetype = 0;
     f.m_face = 0;
-    f.m_vertexArray = 0;
   }
 
   Face::~Face()
@@ -67,19 +66,20 @@ namespace fnt
 
   static void AddGlyphToBitmap( FT_GlyphSlotRec_ const& i_glyph, Bitmap & o_bitmap )
   {
+    auto const bitmapWidth = static_cast<int>(o_bitmap.m_width);
     auto const glyphWidth = static_cast<int>(i_glyph.bitmap.width);
     auto const glyphHeight = static_cast<int>(i_glyph.bitmap.rows);
-    if ( glyphWidth > 256 || glyphHeight > 256 )
+    if ( glyphWidth > bitmapWidth || glyphHeight > bitmapWidth )
     {
       throw 0; // throw glyph too large error
     }
-    if ( o_bitmap.xOrigin + glyphWidth > 256 )
+    if ( o_bitmap.xOrigin + glyphWidth > bitmapWidth )
     {
       o_bitmap.yFloor += o_bitmap.yCeiling;
       o_bitmap.yCeiling = 0;
       o_bitmap.xOrigin = 0;
     }
-    if ( o_bitmap.yFloor + glyphHeight > 256 )
+    if ( o_bitmap.yFloor + glyphHeight > bitmapWidth )
     {
       throw 0; // throw can't fit in texture error
     }
@@ -97,7 +97,7 @@ namespace fnt
     }
     for ( int yIndex = 0; yIndex < glyphHeight; ++yIndex )
     {
-      std::memcpy( &o_bitmap.m_data[ static_cast<std::size_t>(((o_bitmap.yFloor+yIndex)*256)+o_bitmap.xOrigin) ],
+      std::memcpy( &o_bitmap.m_data[ static_cast<std::size_t>(((o_bitmap.yFloor+yIndex)*bitmapWidth)+o_bitmap.xOrigin) ],
                    &buffer[ bitmapStart-(yIndex*bitmapPitch) ],
                    static_cast<std::size_t>(glyphWidth) );
     }
@@ -135,51 +135,9 @@ namespace fnt
     o_model.m_indexList.push_back( vert+3 );
   }
 
-  static GLuint CreateVertexArrayObject( glt::Model const& i_model )
-  {
-    GLuint vertexArray;
-    glGenVertexArrays( 1, &vertexArray );
-    glBindVertexArray( vertexArray );
-    {
-      // Create vertex buffer object
-      GLuint vertexBuffer;
-      glGenBuffers( 1, &vertexBuffer );
-      // Copy data to buffer object
-      glBindBuffer( GL_ARRAY_BUFFER, vertexBuffer );
-      glBufferData( GL_ARRAY_BUFFER, GLsizeiptr(sizeof(glt::Vertex)*i_model.m_vertexList.size()), i_model.m_vertexList.data() , GL_STATIC_DRAW );
-    }
-    {
-      // Enable vertex position attribute
-      glEnableVertexAttribArray( glt::Vertex::Position );
-      glVertexAttribPointer( glt::Vertex::Position, 3, GL_FLOAT, GL_FALSE, GLsizei( sizeof( glt::Vertex ) ), 0 );
-    }
-    /*{
-      // Not enabled since font files don't hold color information
-      glEnableVertexAttribArray( glt::Vertex::Color );
-      glVertexAttribPointer( glt::Vertex::Color, 3, GL_FLOAT, GL_FALSE, GLsizei( sizeof( glt::Vertex ) ), (GLvoid const*)(sizeof(GLfloat)*3) );
-    }*/
-    {
-      // Enable texture attribute
-      glEnableVertexAttribArray( glt::Vertex::Texture );
-      glVertexAttribPointer( glt::Vertex::Texture, 2, GL_FLOAT, GL_FALSE, GLsizei( sizeof( glt::Vertex ) ), (GLvoid const*)(sizeof(GLfloat)*6) );
-    }
-    {
-      // Create index buffer object
-      GLuint indexBuffer;
-      glGenBuffers( 1, &indexBuffer );
-      // Copy index data
-      glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-      glBufferData( GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(sizeof(GLuint)*i_model.m_indexList.size()), i_model.m_indexList.data(), GL_STATIC_DRAW);
-    }
-    // Unbind vertex array
-    glBindVertexArray(0);
-
-    return vertexArray;
-  }
-
   void Face::LoadGlyphs( std::u32string const& i_characters )
   {
-    int const sideLength = 256;
+    int const sideLength = 512;
     Bitmap faceBitmap { sideLength, sideLength };
     glt::Model faceModel;
 
@@ -201,7 +159,7 @@ namespace fnt
     glt::Image const faceImage { glt::ImageDescription { sideLength, sideLength, GL_RED, GL_UNSIGNED_BYTE },
                                  std::move(faceBitmap.m_data) };
     m_texture = glt::Texture { faceImage, { 0, GL_CLAMP_TO_EDGE, GL_NEAREST, false } };
-    m_vertexArray = CreateVertexArrayObject( faceModel );
+    m_vertexArray = glt::VertexArray( faceModel );
   }
 
   Glyph const& Face::GlyphData(uint32_t glyph) const

@@ -44,6 +44,7 @@
             <pElem>../../../lib/freetype-2.5.5/include</pElem>
             <pElem>../../../lib/glew-1.12.0/include</pElem>
             <pElem>../libgltools/src</pElem>
+            <pElem>../libtools/src</pElem>
           </incDir>
           <commandLine>-Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector -std=c++1y</commandLine>
           <preprocessorList>
@@ -81,6 +82,7 @@
             <pElem>../../../lib/freetype-2.5.5/include</pElem>
             <pElem>../../../lib/glew-1.12.0/include</pElem>
             <pElem>../libgltools/src</pElem>
+            <pElem>../libtools/src</pElem>
           </incDir>
           <commandLine>-Wfatal-errors -Wall -Wextra -pedantic -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wswitch-default -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-conversion -Wlogical-op -Wmissing-declarations -Wmissing-noreturn -Wmissing-format-attribute -Wpacked -Wredundant-decls -Wunreachable-code -Winvalid-pch -Wvolatile-register-var -Wdisabled-optimization -Wstack-protector -std=c++1y</commandLine>
           <preprocessorList>
